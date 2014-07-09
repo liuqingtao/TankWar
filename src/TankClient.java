@@ -22,7 +22,8 @@ public class TankClient extends Frame{
 			}			
 		}
 		);
-		this.addKeyListener(new KeyAction());
+		//let tank move
+		this.addKeyListener(new KeyMonitor());
 		new Thread(new PaintThread()).start();
 		this.setResizable(false); //设置窗口不可改变大小
 		setVisible(true);
@@ -52,23 +53,23 @@ public class TankClient extends Frame{
 		g.drawImage(offScreenImage, 0, 0, null);
 	}
 	
-	class KeyAction extends KeyAdapter{
+	class KeyMonitor extends KeyAdapter{
 		
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
 			switch(key){
 				case KeyEvent.VK_UP:
 //System.out.println("UP");
-					y = y-5;
+					y -= 5;
 					break;
 				case KeyEvent.VK_DOWN:
-					y = y+5;
+					y += 5;
 					break;
 				case KeyEvent.VK_LEFT:
-					x = x-5;
+					x -= 5;
 					break;
 				case KeyEvent.VK_RIGHT:
-					x = x+5;
+					x += 5;
 				
 			}
 		}
