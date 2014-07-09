@@ -1,7 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 public class TankClient extends Frame{
-
+	
+	
 
 	public int x=50,y=50;
 	public static void main(String[] args) {
@@ -26,13 +27,28 @@ public class TankClient extends Frame{
 		this.setResizable(false); //设置窗口不可改变大小
 		setVisible(true);
 	}
-
+ 
+	Image offScreenImage = null;
+	
 	public void paint(Graphics g) {
 //System.out.println("x="+x);
 		Color c = g.getColor();
 		g.setColor(Color.RED);
 		g.fillOval(x, y, 30, 30); //画出坦克
 		g.setColor(c);
+	}
+	
+	public void update(Graphics g) {
+		if(offScreenImage == null){
+			offScreenImage = this.createImage(800, 600);
+		}
+		Graphics offScreen = offScreenImage.getGraphics();
+		Color c = offScreen.getColor();
+		offScreen.setColor(Color.GREEN);
+		offScreen.fillRect(0, 0, 800, 600);
+		offScreen.setColor(c);
+		paint(offScreen);
+		g.drawImage(offScreenImage, 0, 0, null);
 	}
 	
 	class KeyAction extends KeyAdapter{
@@ -64,7 +80,7 @@ public class TankClient extends Frame{
 			try {
 					while(true){
 						repaint();
-					Thread.sleep(150);
+					Thread.sleep(10);
 				}	
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
