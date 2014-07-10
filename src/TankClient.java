@@ -4,7 +4,8 @@ public class TankClient extends Frame{
 	
 	public static final int GAME_WIDTH = 800;
 	public static final int GAME_HEIGHT =600;
-	public int x=50,y=50;
+	Tank myTank = new Tank(50,50);
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new TankClient().aLunch();
@@ -32,11 +33,7 @@ public class TankClient extends Frame{
 	Image offScreenImage = null;
 	
 	public void paint(Graphics g) {
-//System.out.println("x="+x);
-		Color c = g.getColor();
-		g.setColor(Color.RED);
-		g.fillOval(x, y, 30, 30); //»­³öÌ¹¿Ë
-		g.setColor(c);
+		myTank.paint(g);
 	}
 	
 //double buffer
@@ -54,25 +51,10 @@ public class TankClient extends Frame{
 	}
 	
 	class KeyMonitor extends KeyAdapter{
-		
 		public void keyPressed(KeyEvent e) {
-			int key = e.getKeyCode();
-			switch(key){
-				case KeyEvent.VK_UP:
-//System.out.println("UP");
-					y -= 5;
-					break;
-				case KeyEvent.VK_DOWN:
-					y += 5;
-					break;
-				case KeyEvent.VK_LEFT:
-					x -= 5;
-					break;
-				case KeyEvent.VK_RIGHT:
-					x += 5;
-				
-			}
-		}
+		
+			myTank.keyPressed(e);
+		}		
 		
 	}
 	
