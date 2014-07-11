@@ -5,6 +5,7 @@ public class TankClient extends Frame{
 	public static final int GAME_WIDTH = 800;
 	public static final int GAME_HEIGHT =600;
 	Tank myTank = new Tank(50,50);
+	Missile missile = new Missile(50,50,Tank.Direction.R);
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -34,6 +35,7 @@ public class TankClient extends Frame{
 	
 	public void paint(Graphics g) {
 		myTank.paint(g);
+		missile.draw(g);
 	}
 	
 //double buffer
