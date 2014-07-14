@@ -163,8 +163,8 @@ public class Tank {
 	public Missile fire(){
 		int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
 		int y = this.y + Tank.WIDTH/2 - Missile.WIDTH/2;
-		Missile m = new Missile(x,y,ptdir);
-		tc.missles.add(m);
+		Missile m = new Missile(x,y,ptdir,this.tc);
+		tc.missiles.add(m);
 		return m;
 	}
 	

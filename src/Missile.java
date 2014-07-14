@@ -6,13 +6,23 @@ public class Missile {
 	public static final int YSpeed =10;
 	public static final int WIDTH =10;
 	public static final int HEIGHT =10;
+	private boolean live =true;
+	
+	
+
 	private int x,y;
 	Tank.Direction dir;
+	private TankClient tc;
 	
 	public Missile(int x, int y, Tank.Direction dir) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
+	}
+	
+	public Missile(int x,int y, Tank.Direction dir,TankClient tc){
+		this(x,y,dir);
+		this.tc = tc;
 	}
 	
 	public Missile(Tank t) {
@@ -29,6 +39,8 @@ public class Missile {
 			move();
 		
 	}
+	
+
 
 	private void move() {
 		switch(dir){
@@ -61,6 +73,10 @@ public class Missile {
 			y += YSpeed;
 			break;
 		}
+	if(x <0 || y<0 || x>TankClient.WIDTH || y>TankClient.HEIGHT){
+		tc.missiles.remove(this);
+	}
+	
 		
 	}
 	
