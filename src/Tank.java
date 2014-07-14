@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 
@@ -10,8 +11,20 @@ public class Tank {
 	public static final int YSpeed = 5;
 	public static final int WIDTH =30;
 	public static final int HEIGHT =30;
+	
+	private boolean good;
 	TankClient tc = null;
 	
+	private boolean live =true;
+	
+	public boolean isLive() {
+		return live;
+	}
+
+	public void setLive(boolean live) {
+		this.live = live;
+	}
+
 	public int getX() {
 		return x;
 	}
@@ -32,19 +45,23 @@ public class Tank {
 	Direction dir =Direction.STOP;//坦克的方向
 	Direction ptdir = Direction.R;//坦克炮筒的方向
 	
-	public Tank(int x, int y) {
+	public Tank(int x, int y,boolean good) {
 		this.x = x;
 		this.y = y;
+		this.good = good;
 	}
 	
-	public Tank(int x,int y,TankClient tc){
-		this(x,y);
+	public Tank(int x,int y, boolean good,TankClient tc){
+		this(x,y,good);
 		this.tc =tc;
 	}
 
 	public void paint(Graphics g){
+		if(live == false) return;
 		Color c = g.getColor();
-		g.setColor(Color.RED);
+		if(good) g.setColor(Color.RED);
+		else g.setColor(Color.BLUE);
+		
 		g.fillOval(x, y, WIDTH, HEIGHT); //画出坦克
 		g.setColor(Color.BLACK);
 //根据方向画出炮筒
@@ -185,4 +202,7 @@ public class Tank {
 		else if(!bL && !bU && !bR && !bD) dir =Direction.STOP;
 	}
 
+	public Rectangle getRect(){
+		return new Rectangle(x,y,WIDTH,HEIGHT);
+	}
 }

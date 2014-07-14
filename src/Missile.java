@@ -77,6 +77,16 @@ public class Missile {
 		
 	}
 	
+	public Rectangle getRect(){
+		return new Rectangle(x,y,WIDTH,HEIGHT);
+	}
 	
-
+	public boolean hitTank(Tank t){
+		if(this.getRect().intersects(t.getRect()) && t.isLive()){
+			t.setLive(false);
+			tc.missiles.remove(this);
+			return true;
+		}
+		return false;
+	}
 }
