@@ -13,7 +13,10 @@ public class Explode {
 		this.tc =tc;
 	}
 	public void draw(Graphics g){
-		if(!live) return;
+		if(!live) {
+			tc.explodes.remove(this);
+			return;
+		}
 		
 		if(step == diameter.length){
 			live =false;

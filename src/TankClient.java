@@ -8,7 +8,8 @@ public class TankClient extends Frame{
 	public static final int GAME_HEIGHT =600;
 	Tank myTank = new Tank(50,50,true,this);
 	Tank enemyTank = new Tank(100, 100, false,this);
-	Explode explode = new Explode(70, 70, this);
+	
+	List<Explode> explodes = new ArrayList<Explode>();
 	List<Missile> missiles = new ArrayList<Missile>();
 	
 	public static void main(String[] args) {
@@ -45,9 +46,14 @@ public class TankClient extends Frame{
 			m.draw(g);
 			m.hitTank(enemyTank);
 		}
+		
+		for(int i=0;i<explodes.size();i++){
+			Explode e = explodes.get(i);
+			e.draw(g);
+		}
 		myTank.paint(g);
 		enemyTank.paint(g);
-		explode.draw(g);
+		
 	}
 	
 //double buffer
