@@ -1,11 +1,13 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 public class TankClient extends Frame{
 	
 	public static final int GAME_WIDTH = 800;
 	public static final int GAME_HEIGHT =600;
 	Tank myTank = new Tank(50,50,this);
-	Missile missile = null;
+	List<Missile> missles = new ArrayList<Missile>();
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -35,8 +37,10 @@ public class TankClient extends Frame{
 	Image offScreenImage = null;
 	
 	public void paint(Graphics g) {
+		for(int i=0;i<missles.size();i++){
+			missles.get(i).draw(g);
+		}
 		myTank.paint(g);
-		if(missile != null) missile.draw(g);
 	}
 	
 //double buffer
