@@ -4,6 +4,8 @@ import java.awt.event.*;
 public class Missile {
 	public static final int XSpeed =10;
 	public static final int YSpeed =10;
+	public static final int WIDTH =10;
+	public static final int HEIGHT =10;
 	private int x,y;
 	Tank.Direction dir;
 	
@@ -21,7 +23,7 @@ public class Missile {
 	public void draw(Graphics g){
 			Color c = g.getColor();
 			g.setColor(Color.DARK_GRAY);
-			g.fillOval(x, y, 10, 10); //画出坦克
+			g.fillOval(x, y, WIDTH, HEIGHT); //画出坦克
 			g.setColor(c);
 			
 			move();
