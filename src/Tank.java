@@ -29,7 +29,8 @@ public class Tank {
 	}
 	
 	enum Direction{L,LU,U,RU,R,RD,D,LD,STOP};
-	Direction dir =Direction.STOP;
+	Direction dir =Direction.STOP;//坦克的方向
+	Direction ptdir = Direction.R;//坦克炮筒的方向
 	
 	public Tank(int x, int y) {
 		this.x = x;
@@ -45,8 +46,37 @@ public class Tank {
 		Color c = g.getColor();
 		g.setColor(Color.RED);
 		g.fillOval(x, y, WIDTH, HEIGHT); //画出坦克
+		g.setColor(Color.BLACK);
+//根据方向画出炮筒
+		switch(ptdir){
+		case L:
+			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x, y+HEIGHT/2);
+			break;
+		case LU:
+			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x, y);
+			break;
+		case U:
+			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x+WIDTH/2, y);
+			break;
+		case RU:
+			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x+WIDTH, y);
+			break;
+		case R:
+			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x+WIDTH, y+HEIGHT/2);
+			break;
+		case RD:
+			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x, y+HEIGHT);
+			break;
+		case D:
+			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x+WIDTH/2, y+HEIGHT);
+			break;
+		case LD:
+			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x, y+HEIGHT);
+			break;
+		}
 		g.setColor(c);
 		move();
+		
 	}
 	
 //	根据方向改变坦克位置
@@ -83,6 +113,7 @@ public class Tank {
 			case STOP:
 				break;
 			}
+		if(dir != Direction.STOP) ptdir = dir;
 //System.out.println(dir);
 	}
 	
@@ -132,7 +163,7 @@ public class Tank {
 	public Missile fire(){
 		int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
 		int y = this.y + Tank.WIDTH/2 - Missile.WIDTH/2;
-		Missile m = new Missile(x,y,dir);
+		Missile m = new Missile(x,y,ptdir);
 		return m;
 	}
 	
