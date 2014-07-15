@@ -239,11 +239,27 @@ public class Tank {
 		return new Rectangle(x,y,WIDTH,HEIGHT);
 	}
 	
+	//判断坦克是否撞墙
 	public boolean collidesWithWall(Wall w){
-		if(this.getRect().intersects(w.getRect())){
+		if(this.live && this.getRect().intersects(w.getRect())){
 			stay();
 			return true;
 		}
+		return false;
+	}
+	
+	//判断坦克之间不能互相相撞
+	public boolean collidesWithTank(List<Tank> tanks){
+		for(int i=0;i<tanks.size();i++){
+			Tank t = tanks.get(i);
+			if(this != t){
+				if(this.live && t.isLive() && this.getRect().intersects(t.getRect())){
+					this.stay();
+					t.stay();
+					return true;
+				}		
+			}	
+		} 
 		return false;
 	}
 	
