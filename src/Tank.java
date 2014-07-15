@@ -16,7 +16,7 @@ public class Tank {
 	private static Random r = new Random();
 	private boolean good;
 	TankClient tc = null;
-	
+	int step = r.nextInt(12) +13; //敌军坦克移动相应频数后转方向
 	private boolean live =true;
 	
 	public boolean isLive() {
@@ -145,8 +145,12 @@ public class Tank {
 		if((y + Tank.HEIGHT)>TankClient.GAME_HEIGHT) y =TankClient.GAME_HEIGHT - Tank.HEIGHT;
 		if(!good){
 			Direction[] dirs = Direction.values();
-			int rn = r.nextInt(dirs.length);
-			dir = dirs[rn];
+			if(step == 0){
+				step = r.nextInt(12) +3;
+				int rn = r.nextInt(dirs.length);
+				dir = dirs[rn];
+			}
+			step --;
 		}
 	}
 	
