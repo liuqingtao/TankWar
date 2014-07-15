@@ -96,9 +96,16 @@ public class Missile {
 	//判断子弹与坦克的碰撞
 	public boolean hitTank(Tank t){
 		if(this.getRect().intersects(t.getRect()) && t.isLive() && this.good != t.isGood()){
+			
+			if(t.isGood()){
+				t.setLife(t.getLife() -20);
+				if(t.getLife()<=0) t.setLive(false);
+			}else
+			{
+				t.setLive(false);
+			}
 			Explode e = new Explode(x, y, this.tc);
 			tc.explodes.add(e);
-			t.setLive(false);
 			tc.missiles.remove(this);
 			return true;
 		}

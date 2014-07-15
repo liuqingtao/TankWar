@@ -15,6 +15,16 @@ public class Tank {
 	
 	private static Random r = new Random();
 	private boolean good;
+	private int life =100; //坦克的生命值
+	
+	public int getLife() {
+		return life;
+	}
+
+	public void setLife(int life) {
+		this.life = life;
+	}
+
 	public boolean isGood() {
 		return good;
 	}
