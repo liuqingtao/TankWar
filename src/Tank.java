@@ -190,6 +190,9 @@ public class Tank {
 		case KeyEvent.VK_CONTROL:
 			fire();
 			break;
+		case KeyEvent.VK_A:
+			superFire();
+			break;
 		case KeyEvent.VK_UP:
 			bU = false;
 			break;
@@ -218,6 +221,23 @@ public class Tank {
 		return m;
 	}
 	
+	public Missile fire(Direction dir){
+		if(!live) return null;
+		
+		int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
+		int y = this.y + Tank.WIDTH/2 - Missile.WIDTH/2;
+		Missile m = new Missile(x,y,good,dir,this.tc);
+		tc.missiles.add(m);
+		return m;
+	}
+	
+	//每个方向打出一发炮弹
+	public void superFire(){
+		Direction[] dirs = Direction.values();
+		for(int i=0;i<8;i++){
+			fire(dirs[i]);
+		}
+	}
 //	根据按键判断方向
 	void locateDirection(){
 		if(bL && !bU && !bR && !bD) dir =Direction.L;
