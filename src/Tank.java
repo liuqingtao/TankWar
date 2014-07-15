@@ -6,7 +6,7 @@ import java.util.*;
 
 
 public class Tank {
-	private int x,y;
+	private int x,y,oldX,oldY;
 	private boolean bL = false,bU = false,bR = false,bD = false;
 	public static final int XSpeed =5;
 	public static final int YSpeed = 5;
@@ -54,6 +54,8 @@ public class Tank {
 	public Tank(int x, int y,boolean good) {
 		this.x = x;
 		this.y = y;
+		this.oldX =x;
+		this.oldY =y;
 		this.good = good;
 	}
 	
@@ -109,6 +111,8 @@ public class Tank {
 	
 //	根据方向改变坦克位置
 	public void move(){
+		oldX =x;
+		oldY =y;
 		switch(dir){
 			case L:
 				x -= XSpeed;
@@ -145,6 +149,7 @@ public class Tank {
 		
 		if(x < 0) x =0;
 		if(y <30) y =30;
+		
 		if((x + Tank.WIDTH) > TankClient.GAME_WIDTH) x =TankClient.GAME_WIDTH - Tank.WIDTH;
 		if((y + Tank.HEIGHT)>TankClient.GAME_HEIGHT) y =TankClient.GAME_HEIGHT - Tank.HEIGHT;
 		if(!good){
@@ -202,6 +207,7 @@ public class Tank {
 		locateDirection();
 	}
 	
+	//坦克打出炮弹
 	public Missile fire(){
 		if(!live) return null;
 		
@@ -225,7 +231,20 @@ public class Tank {
 		else if(!bL && !bU && !bR && !bD) dir =Direction.STOP;
 	}
 
+	private void stay(){
+		x =oldX;
+		y=oldY;
+	}
 	public Rectangle getRect(){
 		return new Rectangle(x,y,WIDTH,HEIGHT);
 	}
+	
+	public boolean collidesWithWall(Wall w){
+		if(this.getRect().intersects(w.getRect())){
+			stay();
+			return true;
+		}
+		return false;
+	}
+	
 }

@@ -85,6 +85,15 @@ public class Missile {
 		return new Rectangle(x,y,WIDTH,HEIGHT);
 	}
 	
+	public boolean hitWall(Wall w){
+		if(this.getRect().intersects(w.getRect())){
+			tc.missiles.remove(this);
+			return true;
+		}
+		return false;
+	}
+	
+	//判断子弹与坦克的碰撞
 	public boolean hitTank(Tank t){
 		if(this.getRect().intersects(t.getRect()) && t.isLive() && this.good != t.isGood()){
 			Explode e = new Explode(x, y, this.tc);

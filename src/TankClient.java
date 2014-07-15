@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 public class TankClient extends Frame{
 	
-	public static final int GAME_WIDTH = 800;
-	public static final int GAME_HEIGHT =600;
-	Tank myTank = new Tank(50,50,true,Tank.Direction.STOP,this);
+	public static final int GAME_WIDTH = 800;	//窗口宽度
+	public static final int GAME_HEIGHT =600;	//窗口高度
+	Tank myTank = new Tank(300,300,true,Tank.Direction.STOP,this); //己方坦克
 	
-	List<Explode> explodes = new ArrayList<Explode>();
-	List<Missile> missiles = new ArrayList<Missile>();
-	List<Tank> tanks = new ArrayList<Tank>();
-	
+	List<Explode> explodes = new ArrayList<Explode>();	//爆炸点List
+	List<Missile> missiles = new ArrayList<Missile>();	//子弹List
+	List<Tank> tanks = new ArrayList<Tank>();	//敌方坦克List
+	Wall wall = new Wall(300,100,20,300,this);	//墙
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new TankClient().aLunch();
 	}
 	
-	
+	//画出主窗口
 	public void aLunch(){
 		setLocation(200,200);
 		setSize(GAME_WIDTH,GAME_HEIGHT);
@@ -43,27 +43,33 @@ public class TankClient extends Frame{
  
 	Image offScreenImage = null;
 	
+	//画出子弹
 	public void paint(Graphics g) {
 		g.drawString("sissile count:"+missiles.size(), 10, 50);
 		for(int i=0;i<missiles.size();i++){
 			Missile m = missiles.get(i);
 			m.hitTanks(tanks);
 			m.hitTank(myTank);
+			m.hitWall(wall);
 			m.draw(g);
 			
 		}
-		
+
+		//画出爆炸点
 		for(int i=0;i<explodes.size();i++){
 			Explode e = explodes.get(i);
 			e.draw(g);
 		}
+		
+		//画出坦克
 		myTank.paint(g);
 		for(int i=0;i<tanks.size();i++){
 			Tank t = tanks.get(i);
+			t.collidesWithWall(wall);
 			t.paint(g);
 			
 		}
-		
+		wall.draw(g);
 	}
 	
 //double buffer
