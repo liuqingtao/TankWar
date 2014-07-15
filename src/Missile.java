@@ -8,6 +8,7 @@ public class Missile {
 	public static final int WIDTH =10;
 	public static final int HEIGHT =10;
 
+	private boolean good; //区分子弹是哪方坦克发出
 	private int x,y;
 	Tank.Direction dir;
 	private TankClient tc;
@@ -18,9 +19,10 @@ public class Missile {
 		this.dir = dir;
 	}
 	
-	public Missile(int x,int y, Tank.Direction dir,TankClient tc){
+	public Missile(int x,int y, boolean good,Tank.Direction dir,TankClient tc){
 		this(x,y,dir);
 		this.tc = tc;
+		this.good = good;
 	}
 	
 	public Missile(Tank t) {
@@ -30,8 +32,9 @@ public class Missile {
 
 	public void draw(Graphics g){
 			Color c = g.getColor();
-			g.setColor(Color.DARK_GRAY);
-			g.fillOval(x, y, WIDTH, HEIGHT); //画出坦克
+			if(good) g.setColor(Color.DARK_GRAY);
+			else g.setColor(Color.ORANGE);
+			g.fillOval(x, y, WIDTH, HEIGHT); //画出子弹
 			g.setColor(c);
 			
 			move();
@@ -83,7 +86,7 @@ public class Missile {
 	}
 	
 	public boolean hitTank(Tank t){
-		if(this.getRect().intersects(t.getRect()) && t.isLive()){
+		if(this.getRect().intersects(t.getRect()) && t.isLive() && this.good != t.isGood()){
 			Explode e = new Explode(x, y, this.tc);
 			tc.explodes.add(e);
 			t.setLive(false);

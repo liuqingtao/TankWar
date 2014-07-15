@@ -15,6 +15,10 @@ public class Tank {
 	
 	private static Random r = new Random();
 	private boolean good;
+	public boolean isGood() {
+		return good;
+	}
+
 	TankClient tc = null;
 	int step = r.nextInt(12) +13; //敌军坦克移动相应频数后转方向
 	private boolean live =true;
@@ -151,6 +155,7 @@ public class Tank {
 				dir = dirs[rn];
 			}
 			step --;
+			if(r.nextInt(40)>38) this.fire();
 		}
 	}
 	
@@ -198,9 +203,11 @@ public class Tank {
 	}
 	
 	public Missile fire(){
+		if(!live) return null;
+		
 		int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
 		int y = this.y + Tank.WIDTH/2 - Missile.WIDTH/2;
-		Missile m = new Missile(x,y,ptdir,this.tc);
+		Missile m = new Missile(x,y,good,ptdir,this.tc);
 		tc.missiles.add(m);
 		return m;
 	}
