@@ -7,10 +7,10 @@ public class TankClient extends Frame{
 	public static final int GAME_WIDTH = 800;
 	public static final int GAME_HEIGHT =600;
 	Tank myTank = new Tank(50,50,true,this);
-	Tank enemyTank = new Tank(100, 100, false,this);
 	
 	List<Explode> explodes = new ArrayList<Explode>();
 	List<Missile> missiles = new ArrayList<Missile>();
+	List<Tank> tanks = new ArrayList<Tank>();
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -22,6 +22,10 @@ public class TankClient extends Frame{
 		setLocation(200,200);
 		setSize(GAME_WIDTH,GAME_HEIGHT);
 		setTitle("TankWar");
+		
+		for(int i=0;i<5;i++){
+			tanks.add(new Tank(50+40*(i+1),50,false,this));
+		}
 		this.setBackground(Color.GREEN); //设置窗口的背景色
 		//添加关闭动作
 		this.addWindowListener(new WindowAdapter() {			
@@ -43,8 +47,9 @@ public class TankClient extends Frame{
 		g.drawString("sissile count:"+missiles.size(), 10, 50);
 		for(int i=0;i<missiles.size();i++){
 			Missile m = missiles.get(i);
+			m.hitTanks(tanks);
 			m.draw(g);
-			m.hitTank(enemyTank);
+			
 		}
 		
 		for(int i=0;i<explodes.size();i++){
@@ -52,7 +57,11 @@ public class TankClient extends Frame{
 			e.draw(g);
 		}
 		myTank.paint(g);
-		enemyTank.paint(g);
+		for(int i=0;i<tanks.size();i++){
+			Tank t = tanks.get(i);
+			t.paint(g);
+			
+		}
 		
 	}
 	
