@@ -27,7 +27,9 @@ public class TankClient extends Frame{
 		for(int i=0;i<5;i++){
 			tanks.add(new Tank(50+40*(i+1),50,false,Direction.D,this));
 		}
-		this.setBackground(Color.GREEN); //设置窗口的背景色
+		
+		this.setBackground(Color.BLACK); //设置窗口的背景色
+		
 		//添加关闭动作
 		this.addWindowListener(new WindowAdapter() {			
 			public void windowClosing(WindowEvent e) {
@@ -35,6 +37,7 @@ public class TankClient extends Frame{
 			}			
 		}
 		);
+		
 		//let tank move
 		this.addKeyListener(new KeyMonitor());
 		new Thread(new PaintThread()).start();
@@ -46,8 +49,11 @@ public class TankClient extends Frame{
 	
 	//画出子弹
 	public void paint(Graphics g) {
+		Color c =g.getColor();
+		g.setColor(Color.BLUE);
 		g.drawString("sissile count:"+missiles.size(), 10, 50);
 		g.drawString("Tank's life:" + myTank.getLife(), 10, 70);
+		g.setColor(c);
 		for(int i=0;i<missiles.size();i++){
 			Missile m = missiles.get(i);
 			m.hitTanks(tanks);
@@ -91,7 +97,7 @@ public class TankClient extends Frame{
 		}
 		Graphics offScreen = offScreenImage.getGraphics();
 		Color c = offScreen.getColor();
-		offScreen.setColor(Color.GREEN);
+		offScreen.setColor(Color.BLACK);
 		offScreen.fillRect(0, 0, GAME_WIDTH,GAME_HEIGHT);
 		offScreen.setColor(c);
 		paint(offScreen);

@@ -16,20 +16,20 @@ public class Tank {
 	public static final int HEIGHT =50;
 	private static final int BaseLife =100; //坦克的初始生命
 	
-private static Toolkit tk =Toolkit.getDefaultToolkit();
+	private static Toolkit tk =Toolkit.getDefaultToolkit();
 	
 	private static Image[] tankImgs = null;
 	private static Map<String,Image> imgs = new HashMap<String,Image>();
 	static{
 		tankImgs = new Image[]{
-			tk.getImage(Explode.class.getClassLoader().getResource("images/tankL.gif")),
-			tk.getImage(Explode.class.getClassLoader().getResource("images/tankLU.gif")),
-			tk.getImage(Explode.class.getClassLoader().getResource("images/tankU.gif")),
-			tk.getImage(Explode.class.getClassLoader().getResource("images/tankRU.gif")),
-			tk.getImage(Explode.class.getClassLoader().getResource("images/tankR.gif")),
-			tk.getImage(Explode.class.getClassLoader().getResource("images/tankRD.gif")),
-			tk.getImage(Explode.class.getClassLoader().getResource("images/tankD.gif")),
-			tk.getImage(Explode.class.getClassLoader().getResource("images/tankLD.gif"))
+			tk.getImage(Tank.class.getClassLoader().getResource("images/tankL.gif")),
+			tk.getImage(Tank.class.getClassLoader().getResource("images/tankLU.gif")),
+			tk.getImage(Tank.class.getClassLoader().getResource("images/tankU.gif")),
+			tk.getImage(Tank.class.getClassLoader().getResource("images/tankRU.gif")),
+			tk.getImage(Tank.class.getClassLoader().getResource("images/tankR.gif")),
+			tk.getImage(Tank.class.getClassLoader().getResource("images/tankRD.gif")),
+			tk.getImage(Tank.class.getClassLoader().getResource("images/tankD.gif")),
+			tk.getImage(Tank.class.getClassLoader().getResource("images/tankLD.gif"))
 		};
 		
 		
