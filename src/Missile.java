@@ -10,16 +10,16 @@ public class Missile {
 
 	private boolean good; //区分子弹是哪方坦克发出
 	private int x,y;
-	Tank.Direction dir;
+	Direction dir;
 	private TankClient tc;
 	
-	public Missile(int x, int y, Tank.Direction dir) {
+	public Missile(int x, int y, Direction dir) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 	}
 	
-	public Missile(int x,int y, boolean good,Tank.Direction dir,TankClient tc){
+	public Missile(int x,int y, boolean good,Direction dir,TankClient tc){
 		this(x,y,dir);
 		this.tc = tc;
 		this.good = good;

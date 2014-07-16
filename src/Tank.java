@@ -59,7 +59,7 @@ public class Tank {
 		this.y = y;
 	}
 	
-	enum Direction{L,LU,U,RU,R,RD,D,LD,STOP};
+	
 	Direction dir =Direction.STOP;//坦克的方向
 	Direction ptdir = Direction.R;//坦克炮筒的方向
 	

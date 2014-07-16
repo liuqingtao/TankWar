@@ -6,7 +6,7 @@ public class TankClient extends Frame{
 	
 	public static final int GAME_WIDTH = 800;	//窗口宽度
 	public static final int GAME_HEIGHT =600;	//窗口高度
-	Tank myTank = new Tank(350,300,true,Tank.Direction.STOP,this); //己方坦克
+	Tank myTank = new Tank(350,300,true,Direction.STOP,this); //己方坦克
 	
 	List<Explode> explodes = new ArrayList<Explode>();	//爆炸点List
 	List<Missile> missiles = new ArrayList<Missile>();	//子弹List
@@ -25,7 +25,7 @@ public class TankClient extends Frame{
 		setTitle("TankWar");
 		
 		for(int i=0;i<5;i++){
-			tanks.add(new Tank(50+40*(i+1),50,false,Tank.Direction.D,this));
+			tanks.add(new Tank(50+40*(i+1),50,false,Direction.D,this));
 		}
 		this.setBackground(Color.GREEN); //设置窗口的背景色
 		//添加关闭动作
@@ -70,7 +70,7 @@ public class TankClient extends Frame{
 		
 		if(tanks.size()<=0){
 			for(int i=0;i<10;i++){
-				tanks.add(new Tank(50+40*(i+1),50,false,Tank.Direction.D,this));
+				tanks.add(new Tank(50+40*(i+1),50,false,Direction.D,this));
 			}
 		}
 		
