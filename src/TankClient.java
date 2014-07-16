@@ -24,7 +24,7 @@ public class TankClient extends Frame{
 		setSize(GAME_WIDTH,GAME_HEIGHT);
 		setTitle("TankWar");
 		
-		for(int i=0;i<10;i++){
+		for(int i=0;i<5;i++){
 			tanks.add(new Tank(50+40*(i+1),50,false,Tank.Direction.D,this));
 		}
 		this.setBackground(Color.GREEN); //设置窗口的背景色
@@ -67,6 +67,13 @@ public class TankClient extends Frame{
 		myTank.paint(g);
 		myTank.eatBoold(bd);
 		bd.draw(g);
+		
+		if(tanks.size()<=0){
+			for(int i=0;i<10;i++){
+				tanks.add(new Tank(50+40*(i+1),50,false,Tank.Direction.D,this));
+			}
+		}
+		
 		for(int i=0;i<tanks.size();i++){
 			Tank t = tanks.get(i);
 			t.collidesWithWall(wall);

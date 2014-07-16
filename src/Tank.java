@@ -12,6 +12,7 @@ public class Tank {
 	public static final int YSpeed = 5;
 	public static final int WIDTH =30;
 	public static final int HEIGHT =30;
+	private static final int BaseLife =100; //坦克的初始生命
 	
 	private static Random r = new Random();
 	private boolean good;
@@ -191,6 +192,8 @@ public class Tank {
 		case KeyEvent.VK_RIGHT:
 			bR = true;
 			break;
+		case KeyEvent.VK_F2:
+			rebirth();
 			
 		}
 		locateDirection();
@@ -297,7 +300,7 @@ public class Tank {
 	
 	public boolean eatBoold(Boold bd){
 		if(this.isGood() && this.isLive() && bd.isLive() && this.getRect().intersects(bd.getRect())){
-			this.life =100;
+			this.life =BaseLife;
 			bd.setLive(false);
 			return true;
 		}
@@ -311,6 +314,13 @@ public class Tank {
 			g.drawRect(x, y-10, WIDTH, 10);
 			g.fillRect(x, y-10, WIDTH*life/100, 10);
 			g.setColor(c);
+		}
+	}
+	
+	public void rebirth(){
+		if(this.isGood()) {
+			this.setLive(true);
+			this.life =BaseLife;
 		}
 	}
 }
