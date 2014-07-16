@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.*;
 
@@ -10,9 +12,38 @@ public class Tank {
 	private boolean bL = false,bU = false,bR = false,bD = false;
 	public static final int XSpeed =5;
 	public static final int YSpeed = 5;
-	public static final int WIDTH =30;
-	public static final int HEIGHT =30;
+	public static final int WIDTH =50;
+	public static final int HEIGHT =50;
 	private static final int BaseLife =100; //坦克的初始生命
+	
+private static Toolkit tk =Toolkit.getDefaultToolkit();
+	
+	private static Image[] tankImgs = null;
+	private static Map<String,Image> imgs = new HashMap<String,Image>();
+	static{
+		tankImgs = new Image[]{
+			tk.getImage(Explode.class.getClassLoader().getResource("images/tankL.gif")),
+			tk.getImage(Explode.class.getClassLoader().getResource("images/tankLU.gif")),
+			tk.getImage(Explode.class.getClassLoader().getResource("images/tankU.gif")),
+			tk.getImage(Explode.class.getClassLoader().getResource("images/tankRU.gif")),
+			tk.getImage(Explode.class.getClassLoader().getResource("images/tankR.gif")),
+			tk.getImage(Explode.class.getClassLoader().getResource("images/tankRD.gif")),
+			tk.getImage(Explode.class.getClassLoader().getResource("images/tankD.gif")),
+			tk.getImage(Explode.class.getClassLoader().getResource("images/tankLD.gif"))
+		};
+		
+		
+		 imgs.put("L", tankImgs[0]);
+		 imgs.put("LU", tankImgs[1]);
+		 imgs.put("U", tankImgs[2]);
+		 imgs.put("RU", tankImgs[3]);
+		 imgs.put("R", tankImgs[4]);
+		 imgs.put("RD", tankImgs[5]);
+		 imgs.put("D", tankImgs[6]);
+		 imgs.put("LD", tankImgs[7]);
+		 
+	
+	};
 	
 	private static Random r = new Random();
 	private boolean good;
@@ -78,43 +109,40 @@ public class Tank {
 	}
 
 	public void paint(Graphics g){
+		Color c =g.getColor();
 		if(!live){
 			if(!good) {tc.tanks.remove(this);}
 			
 		return;
 		}
-		Color c = g.getColor();
-		if(good) g.setColor(Color.RED);
-		else g.setColor(Color.BLUE);
 		
-		g.fillOval(x, y, WIDTH, HEIGHT); //画出坦克
 		g.setColor(Color.BLACK);
 		if(good) bb.draw(g);
 //根据方向画出炮筒
 		switch(ptdir){
 		case L:
-			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x, y+HEIGHT/2);
+			g.drawImage(imgs.get("L"), x, y, null);
 			break;
 		case LU:
-			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x, y);
+			g.drawImage(imgs.get("LU"), x, y, null);
 			break;
 		case U:
-			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x+WIDTH/2, y);
+			g.drawImage(imgs.get("U"), x, y, null);
 			break;
 		case RU:
-			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x+WIDTH, y);
+			g.drawImage(imgs.get("RU"), x, y, null);
 			break;
 		case R:
-			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x+WIDTH, y+HEIGHT/2);
+			g.drawImage(imgs.get("R"), x, y, null);
 			break;
 		case RD:
-			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x, y+HEIGHT);
+			g.drawImage(imgs.get("RD"), x, y, null);
 			break;
 		case D:
-			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x+WIDTH/2, y+HEIGHT);
+			g.drawImage(imgs.get("D"), x, y, null);
 			break;
 		case LD:
-			g.drawLine(x+WIDTH/2, y+HEIGHT/2, x, y+HEIGHT);
+			g.drawImage(imgs.get("LD"), x, y, null);
 			break;
 		}
 		g.setColor(c);
