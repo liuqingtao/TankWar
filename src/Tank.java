@@ -17,6 +17,7 @@ public class Tank {
 	private boolean good;
 	private int life =100; //坦克的生命值
 	
+	public BooldBar bb = new BooldBar();
 	public int getLife() {
 		return life;
 	}
@@ -87,6 +88,7 @@ public class Tank {
 		
 		g.fillOval(x, y, WIDTH, HEIGHT); //画出坦克
 		g.setColor(Color.BLACK);
+		if(good) bb.draw(g);
 //根据方向画出炮筒
 		switch(ptdir){
 		case L:
@@ -293,4 +295,13 @@ public class Tank {
 		return false;
 	}
 	
+	private class BooldBar{
+		public void  draw(Graphics g){
+			Color c = g.getColor();
+			g.setColor(Color.RED);
+			g.drawRect(x, y-10, WIDTH, 10);
+			g.fillRect(x, y-10, WIDTH*life/100, 10);
+			g.setColor(c);
+		}
+	}
 }
