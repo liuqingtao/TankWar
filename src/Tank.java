@@ -295,6 +295,15 @@ public class Tank {
 		return false;
 	}
 	
+	public boolean eatBoold(Boold bd){
+		if(this.isGood() && this.isLive() && bd.isLive() && this.getRect().intersects(bd.getRect())){
+			this.life =100;
+			bd.setLive(false);
+			return true;
+		}
+		return false;
+	}
+	
 	private class BooldBar{
 		public void  draw(Graphics g){
 			Color c = g.getColor();

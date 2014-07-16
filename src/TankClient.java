@@ -12,6 +12,7 @@ public class TankClient extends Frame{
 	List<Missile> missiles = new ArrayList<Missile>();	//子弹List
 	List<Tank> tanks = new ArrayList<Tank>();	//敌方坦克List
 	Wall wall = new Wall(300,100,20,300,this);	//墙
+	Boold bd = new Boold();
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new TankClient().aLunch();
@@ -64,6 +65,8 @@ public class TankClient extends Frame{
 		
 		//画出坦克
 		myTank.paint(g);
+		myTank.eatBoold(bd);
+		bd.draw(g);
 		for(int i=0;i<tanks.size();i++){
 			Tank t = tanks.get(i);
 			t.collidesWithWall(wall);
@@ -105,7 +108,7 @@ public class TankClient extends Frame{
 			try {
 					while(true){
 						repaint();
-					Thread.sleep(20);
+					Thread.sleep(100);
 				}	
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
