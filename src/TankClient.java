@@ -27,16 +27,8 @@ public class TankClient extends Frame{
 		setTitle("TankWar");
 		
 		//从配置文件中读取坦克数量
-		Properties pro = new Properties();
-		try {
-			pro.load(this.getClass().getClassLoader().getResourceAsStream("config/tank.properties"));
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
-		int initTankCount = Integer.parseInt( pro.getProperty("initTankCount"));
-		for(int i=0;i<initTankCount;i++){
+	
+		for(int i=0;i<Integer.parseInt(PropertyMgr.getProperty("initTankCount"));i++){
 			tanks.add(new Tank(50+40*(i+1),50,false,Direction.D,this));
 		}
 		
